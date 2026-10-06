@@ -47,8 +47,10 @@ sqlite3 road_accidents.db < queries.sql
 - **Rajasthan:** 23,480 (2019) → 19,114 (2020, −18.6%) → 20,951 (+9.6%) → 23,614 (+12.7%) → **24,694 (2023, +4.6%)**. Fatalities 10,563 → 9,250 (−12.4%) → 10,043 → 11,104 → **11,762 (+5.9%)**. Severity stable **45–48 per 100**, 2023 = **47.6 (8th highest among large states)**.
 - **Rajasthan rank:** accidents 7th (2019) → 9th (2020–21) → 7th (2022–23); fatalities steady **6th** (5th in 2021).
 
-## Tableau Public dashboard (build this in ~1 hour)
-Connect Tableau Public to `road_accidents_clean.csv`. Three sheets + one dashboard:
+## Tableau Public dashboard
+**Live dashboard:** _paste your Tableau Public link here after publishing_
+
+Build (in Tableau Public, ~1 hour) from `road_accidents_clean.csv`. Three sheets + one dashboard:
 1. **Map — “2023 accidents by state”:** filled map, State → Detail/Geography, `accidents` (2023 filter) → Color, `fatalities_per_100_accidents` → Tooltip. Title: “Where crashes happen (2023)”.
 2. **Trend — “Rajasthan vs India 2019–2023”:** line chart, `year` → Columns, `SUM(accidents)` → Rows, `state = Rajasthan` vs all-states average (dual axis or filter to Rajasthan + All-India computed). Add YoY labels. Shows COVID dip + rebound past 2019.
 3. **Ranking — “2023 severity: deaths per 100 crashes”:** horizontal bar, top 12 by `fatalities_per_100_accidents`, Rajasthan highlighted (use color mark). Proves volume ≠ severity.
@@ -56,6 +58,11 @@ Connect Tableau Public to `road_accidents_clean.csv`. Three sheets + one dashboa
 - Publish to Tableau Public, paste the link in this README and on your resume.
 
 Tableau tips: set `year` to discrete, `fatalities_per_100_accidents` to 1 decimal, state names match Tableau geocoding except rename “Dadra & Nagar Haveli and Daman & Diu” → Tableau recognises “Dadra and Nagar Haveli”; if geocoding fails, use state names as-is on a bar instead of forcing the map.
+
+## Dashboard preview (Python reference — replicate in Tableau)
+![Rajasthan vs India trend](images/trend_rajasthan_vs_india.png)
+![2023 severity Top 12](images/severity_2023_top12.png)
+![2023 Top 10 accidents](images/top10_accidents_2023.png)
 
 ## Repo structure
 ```
@@ -65,6 +72,8 @@ etl.py                    extract → transform → load
 queries.sql               8 portfolio SQL queries (RANK, LAG, AVG windows)
 road_accidents.db         SQLite output (generated)
 road_accidents_clean.csv  Tableau input (generated)
+images/                   dashboard preview charts (reference for Tableau build)
+RESUME_SNIPPET.md         copy-paste resume bullet + skills
 requirements.txt
 README.md
 ```
